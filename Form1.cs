@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 using stopwatch_app;
 
 namespace stopwatch_app
@@ -18,28 +19,69 @@ namespace stopwatch_app
             InitializeComponent();
         }
 
-        private void button_start_Click(object sender, EventArgs e)
+        int sec = 0;
+        int min = 0;
+        int hour = 0;
+
+        private void timer_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
+            sec += 1;
+            if (sec == 60)
+            {
+                sec = 0;
+                min += 1;
+            }
+            if (min == 60)
+            {
+                min = 0;
+                hour += 1;
+            }
+            
+            if (sec < 10)
+            {
+                label_s.Text = "0" + sec;
+            }
+            else
+            {
+                label_s.Text = sec.ToString();
+            }
+            if (min < 10)
+            {
+                label_m.Text = "0" + min;
+            }
+            else
+            {
+                label_m.Text = min.ToString();
+            }
+            if (hour < 10)
+            {
+                label_h.Text = "0" + hour;
+            }
+            else
+            {
+                label_h.Text = hour.ToString();
+            }
         }
 
-        // git test
+        private void button_start_Click(object sender, EventArgs e)
+        {
+            timer.Start();
+        }
 
         private void button_pause_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
+            timer.Stop();
         }
 
         private void button_stop_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            label.Text = "00:00:00";
+            timer.Stop();
+            sec = 0;
+            min = 0;
+            hour = 0;
+            label_s.Text = "00";
+            label_m.Text = "00";
+            label_h.Text = "00";
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
