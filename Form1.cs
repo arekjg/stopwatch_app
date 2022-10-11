@@ -23,6 +23,8 @@ namespace stopwatch_app
             timer1.Enabled = true;
         }
 
+        // git test
+
         private void button_pause_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
